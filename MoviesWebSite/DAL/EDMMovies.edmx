@@ -1,0 +1,565 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MoviesSiteDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MovieCategories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movies">
+          <Key>
+            <PropertyRef Name="MovieID" />
+          </Key>
+          <Property Name="MovieID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="MovieName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Director" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MovieImage" Type="nvarchar" MaxLength="50" />
+          <Property Name="MovieCost" Type="money" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="3800" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="OrderDetailID" />
+          </Key>
+          <Property Name="OrderDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="MovieID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="UnitCost" Type="money" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="ReviewID" />
+          </Key>
+          <Property Name="ReviewID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieID" Type="int" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="3850" />
+        </EntityType>
+        <EntityType Name="ShoppingCart">
+          <Key>
+            <PropertyRef Name="RecordID" />
+          </Key>
+          <Property Name="RecordID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CartID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="MovieID" Type="int" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shows">
+          <Key>
+            <PropertyRef Name="ShowID" />
+          </Key>
+          <Property Name="ShowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieID" Type="int" Nullable="false" />
+          <Property Name="ShowTime" Type="datetime" Nullable="false" />
+          <Property Name="MaxTickets" Type="int" Nullable="false" />
+          <Property Name="SoldTickets" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\MOVIESWEBSITE\MOVIESWEBSITE\APP_DATA\MOVIESSITEDB.MDF.dbo.ViewCart' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewCart">
+          <Key>
+            <PropertyRef Name="MovieID" />
+          </Key>
+          <Property Name="MovieID" Type="int" Nullable="false" />
+          <Property Name="MovieName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MovieCost" Type="money" Nullable="false" />
+          <Property Name="CartID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\MOVIESWEBSITE\MOVIESWEBSITE\APP_DATA\MOVIESSITEDB.MDF.dbo.ViewOrderDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewOrderDetails">
+          <Key>
+            <PropertyRef Name="MovieID" />
+            <PropertyRef Name="MovieCost" />
+            <PropertyRef Name="Quantity" />
+          </Key>
+          <Property Name="MovieID" Type="int" Nullable="false" />
+          <Property Name="MovieName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MovieCost" Type="money" Nullable="false" />
+          <Property Name="OrderDetailID" Type="int" Nullable="false" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Movies_MovieCategories">
+          <End Role="MovieCategories" Type="Self.MovieCategories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Movies" Type="Self.Movies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovieCategories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Movies">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Movies">
+          <End Role="Movies" Type="Self.Movies" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingCart_Movies">
+          <End Role="Movies" Type="Self.Movies" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="ShoppingCart">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shows_Movies">
+          <End Role="Movies" Type="Self.Movies" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Shows" Type="Self.Shows" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="Shows">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MoviesSiteDBModelStoreContainer">
+          <EntitySet Name="MovieCategories" EntityType="Self.MovieCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movies" EntityType="Self.Movies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shows" EntityType="Self.Shows" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ViewCart" EntityType="Self.ViewCart" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[ViewCart].[MovieID] AS [MovieID], 
+[ViewCart].[MovieName] AS [MovieName], 
+[ViewCart].[MovieCost] AS [MovieCost], 
+[ViewCart].[CartID] AS [CartID], 
+[ViewCart].[Quantity] AS [Quantity]
+FROM [dbo].[ViewCart] AS [ViewCart]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewOrderDetails" EntityType="Self.ViewOrderDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[ViewOrderDetails].[MovieID] AS [MovieID], 
+[ViewOrderDetails].[MovieName] AS [MovieName], 
+[ViewOrderDetails].[MovieCost] AS [MovieCost], 
+[ViewOrderDetails].[OrderDetailID] AS [OrderDetailID], 
+[ViewOrderDetails].[OrderID] AS [OrderID], 
+[ViewOrderDetails].[Quantity] AS [Quantity], 
+[ViewOrderDetails].[DateTime] AS [DateTime]
+FROM [dbo].[ViewOrderDetails] AS [ViewOrderDetails]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Movies_MovieCategories" Association="Self.FK_Movies_MovieCategories">
+            <End Role="MovieCategories" EntitySet="MovieCategories" />
+            <End Role="Movies" EntitySet="Movies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Movies" Association="Self.FK_Reviews_Movies">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingCart_Movies" Association="Self.FK_ShoppingCart_Movies">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="ShoppingCart" EntitySet="ShoppingCart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shows_Movies" Association="Self.FK_Shows_Movies">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Shows" EntitySet="Shows" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MoviesSiteDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MovieCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Movies" Relationship="Self.FK_Movies_MovieCategories" FromRole="MovieCategories" ToRole="Movies" />
+        </EntityType>
+        <EntityType Name="Movy">
+          <Key>
+            <PropertyRef Name="MovieID" />
+          </Key>
+          <Property Name="MovieID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="MovieName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Director" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MovieImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MovieCost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="3800" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MovieCategory" Relationship="Self.FK_Movies_MovieCategories" FromRole="Movies" ToRole="MovieCategories" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK_Reviews_Movies" FromRole="Movies" ToRole="Reviews" />
+          <NavigationProperty Name="ShoppingCarts" Relationship="Self.FK_ShoppingCart_Movies" FromRole="Movies" ToRole="ShoppingCart" />
+          <NavigationProperty Name="Shows" Relationship="Self.FK_Shows_Movies" FromRole="Movies" ToRole="Shows" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderDetailID" />
+          </Key>
+          <Property Name="OrderDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="MovieID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="UnitCost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetails_Orders" FromRole="OrderDetails" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Orders" FromRole="Orders" ToRole="OrderDetails" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ReviewID" />
+          </Key>
+          <Property Name="ReviewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="3850" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Movy" Relationship="Self.FK_Reviews_Movies" FromRole="Reviews" ToRole="Movies" />
+        </EntityType>
+        <EntityType Name="ShoppingCart">
+          <Key>
+            <PropertyRef Name="RecordID" />
+          </Key>
+          <Property Name="RecordID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CartID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="MovieID" Type="Int32" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Movy" Relationship="Self.FK_ShoppingCart_Movies" FromRole="ShoppingCart" ToRole="Movies" />
+        </EntityType>
+        <EntityType Name="Show">
+          <Key>
+            <PropertyRef Name="ShowID" />
+          </Key>
+          <Property Name="ShowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieID" Type="Int32" Nullable="false" />
+          <Property Name="ShowTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MaxTickets" Type="Int32" Nullable="false" />
+          <Property Name="SoldTickets" Type="Int32" />
+          <NavigationProperty Name="Movy" Relationship="Self.FK_Shows_Movies" FromRole="Shows" ToRole="Movies" />
+        </EntityType>
+        <EntityType Name="ViewCart">
+          <Key>
+            <PropertyRef Name="MovieID" />
+          </Key>
+          <Property Name="MovieID" Type="Int32" Nullable="false" />
+          <Property Name="MovieName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MovieCost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="CartID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ViewOrderDetail">
+          <Key>
+            <PropertyRef Name="MovieID" />
+            <PropertyRef Name="MovieCost" />
+            <PropertyRef Name="Quantity" />
+          </Key>
+          <Property Name="MovieID" Type="Int32" Nullable="false" />
+          <Property Name="MovieName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MovieCost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="OrderDetailID" Type="Int32" Nullable="false" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Movies_MovieCategories">
+          <End Role="MovieCategories" Type="Self.MovieCategory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Movies" Type="Self.Movy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovieCategories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Movies">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Movies">
+          <End Role="Movies" Type="Self.Movy" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reviews" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingCart_Movies">
+          <End Role="Movies" Type="Self.Movy" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="ShoppingCart">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shows_Movies">
+          <End Role="Movies" Type="Self.Movy" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Shows" Type="Self.Show" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="Shows">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Role="Orders" Type="Self.Order" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MoviesSiteDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MovieCategories" EntityType="Self.MovieCategory" />
+          <EntitySet Name="Movies" EntityType="Self.Movy" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Reviews" EntityType="Self.Review" />
+          <EntitySet Name="ShoppingCarts" EntityType="Self.ShoppingCart" />
+          <EntitySet Name="Shows" EntityType="Self.Show" />
+          <EntitySet Name="ViewCarts" EntityType="Self.ViewCart" />
+          <EntitySet Name="ViewOrderDetails" EntityType="Self.ViewOrderDetail" />
+          <AssociationSet Name="FK_Movies_MovieCategories" Association="Self.FK_Movies_MovieCategories">
+            <End Role="MovieCategories" EntitySet="MovieCategories" />
+            <End Role="Movies" EntitySet="Movies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Movies" Association="Self.FK_Reviews_Movies">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingCart_Movies" Association="Self.FK_ShoppingCart_Movies">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="ShoppingCart" EntitySet="ShoppingCarts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shows_Movies" Association="Self.FK_Shows_Movies">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Shows" EntitySet="Shows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MoviesSiteDBModelStoreContainer" CdmEntityContainer="MoviesSiteDBEntities">
+          <EntitySetMapping Name="MovieCategories">
+            <EntityTypeMapping TypeName="MoviesSiteDBModel.MovieCategory">
+              <MappingFragment StoreEntitySet="MovieCategories">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movies">
+            <EntityTypeMapping TypeName="MoviesSiteDBModel.Movy">
+              <MappingFragment StoreEntitySet="Movies">
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="MovieName" ColumnName="MovieName" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="MovieImage" ColumnName="MovieImage" />
+                <ScalarProperty Name="MovieCost" ColumnName="MovieCost" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="MoviesSiteDBModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitCost" ColumnName="UnitCost" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="MoviesSiteDBModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="MoviesSiteDBModel.Review">
+              <MappingFragment StoreEntitySet="Reviews">
+                <ScalarProperty Name="ReviewID" ColumnName="ReviewID" />
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShoppingCarts">
+            <EntityTypeMapping TypeName="MoviesSiteDBModel.ShoppingCart">
+              <MappingFragment StoreEntitySet="ShoppingCart">
+                <ScalarProperty Name="RecordID" ColumnName="RecordID" />
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shows">
+            <EntityTypeMapping TypeName="MoviesSiteDBModel.Show">
+              <MappingFragment StoreEntitySet="Shows">
+                <ScalarProperty Name="ShowID" ColumnName="ShowID" />
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+                <ScalarProperty Name="ShowTime" ColumnName="ShowTime" />
+                <ScalarProperty Name="MaxTickets" ColumnName="MaxTickets" />
+                <ScalarProperty Name="SoldTickets" ColumnName="SoldTickets" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewCarts">
+            <EntityTypeMapping TypeName="MoviesSiteDBModel.ViewCart">
+              <MappingFragment StoreEntitySet="ViewCart">
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+                <ScalarProperty Name="MovieName" ColumnName="MovieName" />
+                <ScalarProperty Name="MovieCost" ColumnName="MovieCost" />
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewOrderDetails">
+            <EntityTypeMapping TypeName="MoviesSiteDBModel.ViewOrderDetail">
+              <MappingFragment StoreEntitySet="ViewOrderDetails">
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+                <ScalarProperty Name="MovieName" ColumnName="MovieName" />
+                <ScalarProperty Name="MovieCost" ColumnName="MovieCost" />
+                <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

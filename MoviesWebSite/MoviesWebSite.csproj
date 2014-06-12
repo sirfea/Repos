@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F5F2DE91-2D6B-4C9E-9BB4-EE1E00C34D99}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MoviesWebSite</RootNamespace>
+    <AssemblyName>MoviesWebSite</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="About.aspx" />
+    <Content Include="Account\ChangePassword.aspx" />
+    <Content Include="Account\ChangePasswordSuccess.aspx" />
+    <Content Include="Account\Login.aspx" />
+    <Content Include="Account\Register.aspx" />
+    <Content Include="AddToCart.aspx" />
+    <Content Include="admin_panel.aspx" />
+    <Content Include="App_Data\MoviesSiteDB.mdf" />
+    <Content Include="App_Data\MoviesSiteDB_log.ldf">
+      <DependentUpon>MoviesSiteDB.mdf</DependentUpon>
+    </Content>
+    <Content Include="Catalog\Images\image.gif" />
+    <Content Include="Catalog\imageTest.gif" />
+    <Content Include="Checkout.aspx" />
+    <Content Include="default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="MovieDetails.aspx" />
+    <Content Include="MoviesList.aspx" />
+    <Content Include="MyShoppingCart.aspx" />
+    <Content Include="Styles\Images\1x1.gif" />
+    <Content Include="Styles\Images\a1.gif" />
+    <Content Include="Styles\Images\a2.gif" />
+    <Content Include="Styles\Images\a3.gif" />
+    <Content Include="Styles\Images\a4.gif" />
+    <Content Include="Styles\Images\a6.gif" />
+    <Content Include="Styles\Images\a7.gif" />
+    <Content Include="Styles\Images\account.gif" />
+    <Content Include="Styles\Images\add_to_cart.gif" />
+    <Content Include="Styles\Images\arrowbutton.gif" />
+    <Content Include="Styles\Images\cart.gif" />
+    <Content Include="Styles\Images\EmptyStar.png" />
+    <Content Include="Styles\Images\FilledStar.png" />
+    <Content Include="Styles\Images\final_checkout.gif" />
+    <Content Include="Styles\Images\grid_background.gif" />
+    <Content Include="Styles\Images\headerbackground.gif" />
+    <Content Include="Styles\Images\help_bkgrd.gif" />
+    <Content Include="Styles\Images\logo.gif" />
+    <Content Include="Styles\Images\modernliving.gif" />
+    <Content Include="Styles\Images\modernliving_bkgrd.gif" />
+    <Content Include="Styles\Images\most_secretive_place.gif" />
+    <Content Include="Styles\Images\register.gif" />
+    <Content Include="Styles\Images\reviewrating1.gif" />
+    <Content Include="Styles\Images\reviewrating2.gif" />
+    <Content Include="Styles\Images\reviewrating3.gif" />
+    <Content Include="Styles\Images\reviewrating4.gif" />
+    <Content Include="Styles\Images\reviewrating5.gif" />
+    <Content Include="Styles\Images\reviewrating_d1.gif" />
+    <Content Include="Styles\Images\reviewrating_d2.gif" />
+    <Content Include="Styles\Images\reviewrating_d3.gif" />
+    <Content Include="Styles\Images\reviewrating_d4.gif" />
+    <Content Include="Styles\Images\reviewrating_d5.gif" />
+    <Content Include="Styles\Images\reviewrating_da1.gif" />
+    <Content Include="Styles\Images\reviewrating_da2.gif" />
+    <Content Include="Styles\Images\reviewrating_da3.gif" />
+    <Content Include="Styles\Images\reviewrating_da4.gif" />
+    <Content Include="Styles\Images\reviewrating_da5.gif" />
+    <Content Include="Styles\Images\review_this_product.gif" />
+    <Content Include="Styles\Images\SavedStar.png" />
+    <Content Include="Styles\Images\search.gif" />
+    <Content Include="Styles\Images\services.gif" />
+    <Content Include="Styles\Images\sign_in.gif" />
+    <Content Include="Styles\Images\sign_in_now.gif" />
+    <Content Include="Styles\Images\sitebkgrd.gif" />
+    <Content Include="Styles\Images\sitebkgrdnogray.GIF" />
+    <Content Include="Styles\Images\submit.gif" />
+    <Content Include="Styles\Images\tableRowH.gif" />
+    <Content Include="Styles\Images\target.gif" />
+    <Content Include="Styles\Images\update_cart.gif" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.designer.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddToCart.aspx.cs">
+      <DependentUpon>AddToCart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddToCart.aspx.designer.cs">
+      <DependentUpon>AddToCart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin_panel.aspx.cs">
+      <DependentUpon>admin_panel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin_panel.aspx.designer.cs">
+      <DependentUpon>admin_panel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BLL\MyShoppingCart.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Checkout.aspx.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Checkout.aspx.designer.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\EDMMovies.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EDMMovies.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\EDMMovies.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EDMMovies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\EDMMovies.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EDMMovies.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MovieCategory.cs">
+      <DependentUpon>EDMMovies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Movy.cs">
+      <DependentUpon>EDMMovies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Order.cs">
+      <DependentUpon>EDMMovies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\OrderDetail.cs">
+      <DependentUpon>EDMMovies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Review.cs">
+      <DependentUpon>EDMMovies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\ShoppingCart.cs">
+      <DependentUpon>EDMMovies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Show.cs">
+      <DependentUpon>EDMMovies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\ViewCart.cs">
+      <DependentUpon>EDMMovies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\ViewOrderDetail.cs">
+      <DependentUpon>EDMMovies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDetails.aspx.cs">
+      <DependentUpon>MovieDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MovieDetails.aspx.designer.cs">
+      <DependentUpon>MovieDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MoviesList.aspx.cs">
+      <DependentUpon>MoviesList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MoviesList.aspx.designer.cs">
+      <DependentUpon>MoviesList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyShoppingCart.aspx.cs">
+      <DependentUpon>MyShoppingCart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyShoppingCart.aspx.designer.cs">
+      <DependentUpon>MyShoppingCart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Styles\Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Styles\Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\Site.Master" />
+    <Content Include="Styles\Images\Thumbs.db" />
+    <Content Include="packages.config" />
+    <EntityDeploy Include="DAL\EDMMovies.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EDMMovies.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DAL\EDMMovies.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EDMMovies.edmx</DependentUpon>
+      <LastGenOutput>EDMMovies.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DAL\EDMMovies.edmx.diagram">
+      <DependentUpon>EDMMovies.edmx</DependentUpon>
+    </Content>
+    <Content Include="DAL\EDMMovies.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EDMMovies.edmx</DependentUpon>
+      <LastGenOutput>EDMMovies.cs</LastGenOutput>
+    </Content>
+    <Content Include="Account\Web.config" />
+    <None Include="Properties\PublishProfiles\TicketForU - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\TicketForU - Web Deploy.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>5127</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1654/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
